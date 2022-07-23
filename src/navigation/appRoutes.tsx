@@ -18,7 +18,7 @@ import ForgotPassword from '../screens/forgotPassword';
 import HomeScreen from '../screens/home.screen';
 import EmergencyScreen from '../screens/emergency.screen';
 import WorkScreen from '../screens/work.screen';
-import HrScreen from '../screens/hr.screen';
+import MessengerScreen from '../screens/messenger.screen';
 import CurrentJobScreen from '../screens/currentJob.screen';
 import CompletedRecordScreen from '../screens/completedRecord.screen';
 import UserProfileScreen from '../screens/userProfile.screen';
@@ -115,7 +115,7 @@ const HomeRoutes = () => {
       initialRouteName={HOME_SCREEN}>
       <Stack.Screen name={HOME_SCREEN} component={HomeScreen} />
       <Stack.Screen name={EMERGENCY_SCREEN} component={EmergencyScreen} />
-      <Stack.Screen name={HR_SCREEN} component={HrScreen} />
+      <Stack.Screen name={HR_SCREEN} component={MessengerScreen} />
       <Stack.Screen name={GUIDE_SCREEN} component={GuideScreen} />
       <Stack.Screen name={WORK_ROUTES} component={WorkRoutes} />
       <Stack.Screen name={LEAVE_SCREEN} component={LeaveScreen} />
@@ -159,7 +159,7 @@ const DrawerNavigator = props => {
       />
       <Drawer.Screen
         name={HR_SCREEN}
-        component={HrScreen}
+        component={MessengerScreen}
         options={{
           drawerIcon: () => <HRIcon />,
           drawerLabel: 'HR',

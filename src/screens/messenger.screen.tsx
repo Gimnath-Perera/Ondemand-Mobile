@@ -5,7 +5,6 @@ import {
   View,
   TextInput,
   FlatList,
-  Image,
   Text,
 } from 'react-native';
 import moment from 'moment';
@@ -19,7 +18,6 @@ import {
   sendMessage,
   getChatByUser,
 } from '../actions/user.actions';
-import RNPickerSelect from 'react-native-picker-select';
 import {showMessage} from 'react-native-flash-message';
 import colors from '../res/colors';
 
