@@ -2,8 +2,7 @@ import React from 'react';
 import {SafeAreaView, View, StyleSheet, TouchableOpacity} from 'react-native';
 import Colors from '../res/colors';
 import {NHCText} from '../components';
-import {NHCTextTypes} from '../enums';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 
 import {setUserLoggedOut} from '../actions/user.actions';
 
@@ -26,7 +25,7 @@ import {
   EMERGENCY_SCREEN,
   GUIDE_SCREEN,
   LEAVE_SCREEN,
-  SIGN_IN_SCREEN,
+  PAYMENT_SCREEN,
 } from '../common/constants';
 import {getScaledNumber} from '../library/utils';
 

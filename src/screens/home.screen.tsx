@@ -11,7 +11,7 @@ import {
   EMERGENCY_SCREEN,
   WORK_ROUTES,
   HR_SCREEN,
-  LEAVE_SCREEN,
+  PAYMENT_SCREEN,
   TIME_CAPTURE_SCREEN,
 } from '../common/constants';
 import colors from '../res/colors';
@@ -102,7 +102,7 @@ const Home = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.tile}
-            onPress={() => navigation.navigate(HR_SCREEN)}>
+            onPress={() => navigation.navigate(PAYMENT_SCREEN)}>
             <HRIcon />
             <NHCText
               label="PAYMENTS"

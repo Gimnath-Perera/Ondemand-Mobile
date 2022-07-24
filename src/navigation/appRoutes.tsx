@@ -25,6 +25,7 @@ import UserProfileScreen from '../screens/userProfile.screen';
 import GuideScreen from '../screens/guide.screen';
 import LeaveScreen from '../screens/leave.screen';
 import TimeCaptureScreen from '../screens/timeCapture.screen';
+import PaymentScreen from '../screens/payment.screen';
 
 import {
   HOME_SCREEN,
@@ -51,6 +52,7 @@ import {
   TIME_CAPTURE_SCREEN,
   LEAVE_SCREEN,
   COMPLETED_RECORD_SCREEN,
+  PAYMENT_SCREEN,
 } from '../common/constants';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import CustomeSideMenu from './customDrawer';
@@ -196,6 +198,17 @@ const DrawerNavigator = props => {
         options={{
           drawerIcon: () => <LeaveIcon />,
           drawerLabel: 'Leave',
+          drawerLabelStyle: drawerItmLabelStyle,
+          drawerItemStyle: drawerItemStyle,
+          drawerActiveTintColor: Colors.primary,
+        }}
+      />
+      <Drawer.Screen
+        name={PAYMENT_SCREEN}
+        component={PaymentScreen}
+        options={{
+          drawerIcon: () => <LeaveIcon />,
+          drawerLabel: 'Payment',
           drawerLabelStyle: drawerItmLabelStyle,
           drawerItemStyle: drawerItemStyle,
           drawerActiveTintColor: Colors.primary,

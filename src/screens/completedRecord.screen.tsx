@@ -36,7 +36,7 @@ const CurrentJob = () => {
         </View>
         <View style={styles.dataView}>
           <NHCText
-            label={`${moment(record?.logginDate).format('YYYY/MM/DD') || '-'}`}
+            label={`${moment(record?.logginDate).format('MM/DD') || '-'}`}
             type={NHCTextTypes.H4}
           />
           <NHCText
@@ -49,9 +49,7 @@ const CurrentJob = () => {
         </View>
         <View style={styles.dataView}>
           <NHCText
-            label={`${convertTimeValue(record?.startTime)} - ${convertTimeValue(
-              record?.endTime,
-            )}`}
+            label={`${record?.startTime} - ${record?.endTime}`}
             type={NHCTextTypes.H4}
           />
           <NHCText
@@ -120,6 +118,8 @@ const styles = StyleSheet.create({
     borderRadius: getScaledNumber(10),
     display: 'flex',
     flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'space-evenly',
   },
 
   statusContent: {
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
   dataView: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'center',
     marginHorizontal: getScaledNumber(8),
   },

@@ -33,11 +33,22 @@ const ShiftCalander = ({shifts, onClose}: ShiftCalanderProps) => {
       <View style={styles.modalContent}>
         {convertedData()?.length > 0 ? (
           <>
-            {convertedData()?.map((data: any, index: number) => (
-              <View style={styles.calanderItem} key={index}>
-                <NHCText label={`Monday`} type={NHCTextTypes.H4} />
-              </View>
-            ))}
+            {convertedData()?.map((data: any, index: number) => {
+              return (
+                <View style={styles.calanderItem} key={index}>
+                  <NHCText label={data?.date} type={NHCTextTypes.H4} />
+                  <View style={styles.timeWrapper}>
+                    {data?.times?.length > 0 &&
+                      data?.times?.map(time => (
+                        <NHCText
+                          label={`○ ${time?.workerStartTime} to ${time?.workerEndTime}`}
+                          type={NHCTextTypes.H4}
+                        />
+                      ))}
+                  </View>
+                </View>
+              );
+            })}
           </>
         ) : (
           <NHCText label={`No scheduled shifts found`} type={NHCTextTypes.H4} />
@@ -79,7 +90,12 @@ const styles = StyleSheet.create({
     elevation: 6,
     borderRadius: getScaledNumber(10),
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  timeWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
   },
 });
 
