@@ -8,7 +8,7 @@ import {REVIEW_SCREEN} from '../common/constants';
 import {useDispatch, useSelector} from 'react-redux';
 import {uploadDocuments} from '../actions/user.actions';
 import UploadIcon from '../res/images/uploadIcon.svg';
-import {showMessage, hideMessage} from 'react-native-flash-message';
+import {showMessage} from 'react-native-flash-message';
 import {launchImageLibrary} from 'react-native-image-picker';
 import colors from '../res/colors';
 

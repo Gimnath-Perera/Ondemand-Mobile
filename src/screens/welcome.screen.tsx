@@ -6,7 +6,11 @@ import {useSelector, RootStateOrAny} from 'react-redux';
 import {NHCTextTypes} from '../enums';
 import {NHCText, NHCHeader, NHCButton} from '../components';
 import {getScaledNumber} from '../library/utils';
-import {SIGN_UP_SCREEN_1, REVIEW_SCREEN} from '../common/constants';
+import {
+  SIGN_UP_SCREEN_1,
+  REVIEW_SCREEN,
+  SIGN_IN_SCREEN,
+} from '../common/constants';
 import colors from '../res/colors';
 import WelcomeLogo from '../res/images/headerLogo.svg';
 
@@ -27,6 +31,10 @@ const Welcome = () => {
     }
   };
 
+  const onSignIn = () => {
+    navigate(SIGN_IN_SCREEN);
+  };
+
   return (
     <NHCHeader containerStyle={styles.container}>
       <View style={styles.logoContainer}>
@@ -35,7 +43,7 @@ const Welcome = () => {
       <NHCButton onPress={onSubmit} label="Let’s Get Started" />
       <View style={styles.bottomTextContent}>
         <NHCText label="Already have an account?" type={NHCTextTypes.HINT} />
-        <TouchableOpacity onPress={onSubmit}>
+        <TouchableOpacity onPress={onSignIn}>
           <NHCText
             label=" Sign In?"
             type={NHCTextTypes.HINT}
