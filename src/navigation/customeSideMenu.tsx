@@ -13,7 +13,6 @@ import WorkIcon from '../res/images/workDrawerIcon.svg';
 import EmergencyIcon from '../res/images/emergencyDrawerIcon.svg';
 import HRIcon from '../res/images/hrDrawerIcon.svg';
 import GuideIcon from '../res/images/guideDrawerIcon.svg';
-import LeaveIcon from '../res/images/leaveDrawerIcon.svg';
 import SignOutIcon from '../res/images/signOut.svg';
 
 import {
@@ -24,7 +23,6 @@ import {
   USER_PROFILE_SCREEN,
   EMERGENCY_SCREEN,
   GUIDE_SCREEN,
-  LEAVE_SCREEN,
   PAYMENT_SCREEN,
 } from '../common/constants';
 import {getScaledNumber} from '../library/utils';
@@ -68,12 +66,7 @@ const CustomSidebarMenu = ({navigation}) => {
           <GuideIcon />
           <NHCText label="Guide" bold style={styles.mainCategoryText} />
         </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.mainCategory}
-          onPress={() => navigation.navigate(LEAVE_SCREEN)}>
-          <LeaveIcon />
-          <NHCText label="Leave" bold style={styles.mainCategoryText} />
-        </TouchableOpacity>
+
         <TouchableOpacity
           style={styles.mainCategory}
           onPress={() => navigation.navigate(EMERGENCY_SCREEN)}>
@@ -99,7 +92,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   topCategory: {
-    // backgroundColor: Colors.lightSilver,
     padding: getScaledNumber(15),
     borderRadius: getScaledNumber(5),
     flexDirection: 'row',

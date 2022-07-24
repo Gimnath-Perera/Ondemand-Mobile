@@ -164,7 +164,7 @@ const DrawerNavigator = props => {
         component={MessengerScreen}
         options={{
           drawerIcon: () => <HRIcon />,
-          drawerLabel: 'HR',
+          drawerLabel: 'Messages',
           drawerLabelStyle: drawerItmLabelStyle,
           drawerItemStyle: drawerItemStyle,
           drawerActiveTintColor: Colors.primary,
@@ -192,7 +192,7 @@ const DrawerNavigator = props => {
           drawerActiveTintColor: Colors.primary,
         }}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name={LEAVE_SCREEN}
         component={LeaveScreen}
         options={{
@@ -202,7 +202,7 @@ const DrawerNavigator = props => {
           drawerItemStyle: drawerItemStyle,
           drawerActiveTintColor: Colors.primary,
         }}
-      />
+      /> */}
       <Drawer.Screen
         name={PAYMENT_SCREEN}
         component={PaymentScreen}
