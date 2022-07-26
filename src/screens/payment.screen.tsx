@@ -1,12 +1,6 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  Platform,
-  Alert,
-} from 'react-native';
+import {StyleSheet, View, Platform, Alert} from 'react-native';
 import {NHCTextTypes} from '../enums';
 import {NHCText, NHCPrimaryHeader, NHCButton} from '../components';
 import {getScaledNumber} from '../library/utils';
@@ -16,26 +10,36 @@ import RNFetchBlob from 'rn-fetch-blob';
 import {showMessage} from 'react-native-flash-message';
 import {endLoading, startLoading} from '../actions/common.action';
 
-const startOfMonth = moment()
-  .clone()
-  .startOf('month')
-  .format('YYYY-MM-DDTHH:mm:ssZ');
-
-const endOfMonth = moment()
-  .clone()
-  .endOf('month')
-  .format('YYYY-MM-DDTHH:mm:ssZ');
-
 const BASE_URL = 'https://ondemand-dev.herokuapp.com';
+// const BASE_URL = 'http://192.168.1.102:5000';
 
 const generateInvoiceId = (worker: any) => {
   const _date = moment().format('YYYY-MM-DD');
   return `${_date.toString().replace(/-/g, '')}E${worker}`;
 };
 
-const Work = () => {
+const isButtonDisabled = () => {
+  const today = moment().format('DD');
+  if (
+    Number(today) == 15 ||
+    Number(today) == 16 ||
+    Number(today) == 17 ||
+    Number(today) == 18 ||
+    Number(today) == 30 ||
+    Number(today) == 1 ||
+    Number(today) == 2 ||
+    Number(today) == 3
+  ) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+const Payment = () => {
   const user = useSelector(state => state?.user?.user);
   const dispatch = useDispatch();
+
   const downloadPDF = () => {
     const {dirs} = RNFetchBlob.fs;
     const dirToSave =
@@ -107,6 +111,7 @@ const Work = () => {
   const sendInvoices = () => {
     console.log('Call submit invoice API');
   };
+
   return (
     <NHCPrimaryHeader
       enableDrawer
@@ -126,13 +131,22 @@ const Work = () => {
         <NHCButton
           onPress={downloadPDF}
           label="Generate Invoice (Fortnite)"
-          style={styles.commonContainer}
+          style={
+            isButtonDisabled()
+              ? styles.disableContainer
+              : styles.commonContainer
+          }
+          disabled={isButtonDisabled()}
         />
         <NHCButton
-          style={styles.disableContainer}
+          style={
+            isButtonDisabled()
+              ? styles.disableContainer
+              : styles.commonContainer
+          }
           label="Send Invoice (Fortnite)"
           onPress={sendInvoices}
-          disabled
+          disabled={isButtonDisabled()}
         />
       </View>
     </NHCPrimaryHeader>
@@ -210,4 +224,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Work;
+export default Payment;

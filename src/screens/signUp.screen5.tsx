@@ -1,18 +1,10 @@
 import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {
-  StyleSheet,
-  View,
-  Platform,
-  TouchableOpacity,
-  PermissionsAndroid,
-} from 'react-native';
+import {StyleSheet, View, Platform, TouchableOpacity} from 'react-native';
 import {NHCTextTypes} from '../enums';
 import {NHCText, NHCHeader, NHCInput, NHCButton} from '../components';
 import {getScaledNumber, SCREEN_HEIGHT, SCREEN_WIDTH} from '../library/utils';
 import {SIGN_UP_SCREEN_6} from '../common/constants';
-import {setRegiserDetails} from '../actions/user.actions';
-import {useDispatch, useSelector} from 'react-redux';
 import UploadIcon from '../res/images/uploadIcon.svg';
 import RNPickerSelect from 'react-native-picker-select';
 import {launchImageLibrary} from 'react-native-image-picker';
@@ -37,7 +29,7 @@ const SignUpScreen2 = () => {
 
       const data = {
         uri: assets[0].uri,
-        name: assets[0].fileName,
+        name: `proof_of_id.${assets[0].fileName?.split('.')[1]}`,
         type: assets[0].type,
       };
       setFile(data);

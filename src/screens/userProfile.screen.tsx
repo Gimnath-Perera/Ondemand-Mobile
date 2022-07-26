@@ -12,6 +12,7 @@ import {uploadProfilePic} from '../actions/user.actions';
 import {showMessage} from 'react-native-flash-message';
 
 const BASE_URL = 'https://ondemand-dev.herokuapp.com';
+// const BASE_URL = 'http://192.168.1.102:5000';
 
 const UserProfile = () => {
   const dispatch = useDispatch();

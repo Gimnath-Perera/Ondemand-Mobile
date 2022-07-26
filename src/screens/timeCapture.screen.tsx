@@ -21,6 +21,7 @@ import GetLocation from 'react-native-get-location';
 import RNPickerSelect from 'react-native-picker-select';
 
 import colors from '../res/colors';
+import moment from 'moment';
 
 const TimeCaptureScreen = () => {
   const dispatch = useDispatch();
@@ -230,7 +231,10 @@ const TimeCaptureScreen = () => {
 
       {currentJobDetails?.startTime !== undefined && (
         <NHCText
-          label={`Shift Started at : ${currentJobDetails?.startTime}`}
+          label={`Shift Started at : ${moment(
+            currentJobDetails?.startTime,
+            'HH mm',
+          ).format('hh:mm A')}`}
           type={NHCTextTypes.H3}
           bold
         />

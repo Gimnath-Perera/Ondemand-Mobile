@@ -36,9 +36,11 @@ const SignUpScreen6 = () => {
     const data = new FormData();
 
     if (idPhoto !== null) {
+      console.log('>>===>> >>===>> idPhoto', idPhoto);
       data.append('files', idPhoto);
     }
     if (currentVisa !== null) {
+      console.log('>>===>> >>===>> currentVisa', currentVisa);
       data.append('files', currentVisa);
     }
     if (vaccine !== null) {
@@ -52,28 +54,28 @@ const SignUpScreen6 = () => {
     }
     data.append('owner', userId);
 
-    dispatch(
-      uploadDocuments(
-        data,
-        () => {
-          showMessage({
-            message: 'Success',
-            description: 'Documents uploaded succesfully',
-            type: 'success',
-          });
-          // this will remount the review screen to fetch status
-          navigation.dispatch(StackActions.replace(REVIEW_SCREEN));
-        },
-        data => {
-          showMessage({
-            message: 'Error',
-            description: 'Something went Wrong',
-            type: 'danger',
-          });
-          navigation.dispatch(StackActions.replace(REVIEW_SCREEN));
-        },
-      ),
-    );
+    // dispatch(
+    //   uploadDocuments(
+    //     data,
+    //     () => {
+    //       showMessage({
+    //         message: 'Success',
+    //         description: 'Documents uploaded succesfully',
+    //         type: 'success',
+    //       });
+    //       // this will remount the review screen to fetch status
+    //       navigation.dispatch(StackActions.replace(REVIEW_SCREEN));
+    //     },
+    //     data => {
+    //       showMessage({
+    //         message: 'Error',
+    //         description: 'Something went Wrong',
+    //         type: 'danger',
+    //       });
+    //       navigation.dispatch(StackActions.replace(REVIEW_SCREEN));
+    //     },
+    //   ),
+    // );
   };
 
   const chooseFile = async type => {
