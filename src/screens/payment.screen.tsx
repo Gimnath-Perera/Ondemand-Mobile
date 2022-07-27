@@ -12,8 +12,8 @@ import {showMessage} from 'react-native-flash-message';
 import {endLoading, startLoading} from '../actions/common.action';
 import {uploadInvoice} from '../actions/user.actions';
 
-// const BASE_URL = 'https://ondemand-dev.herokuapp.com';
-const BASE_URL = 'http://192.168.1.102:5000';
+const BASE_URL = 'https://ondemand-dev.herokuapp.com';
+// const BASE_URL = 'http://192.168.1.102:5000';
 
 const startOfMonth = moment()
   .clone()
