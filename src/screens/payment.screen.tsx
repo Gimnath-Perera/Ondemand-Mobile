@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {StyleSheet, View, Platform, Alert} from 'react-native';
+import DocumentPicker, {types} from 'react-native-document-picker';
 import {NHCTextTypes} from '../enums';
 import {NHCText, NHCPrimaryHeader, NHCButton} from '../components';
 import {getScaledNumber} from '../library/utils';
@@ -10,8 +11,18 @@ import RNFetchBlob from 'rn-fetch-blob';
 import {showMessage} from 'react-native-flash-message';
 import {endLoading, startLoading} from '../actions/common.action';
 
-const BASE_URL = 'https://ondemand-dev.herokuapp.com';
-// const BASE_URL = 'http://192.168.1.102:5000';
+// const BASE_URL = 'https://ondemand-dev.herokuapp.com';
+const BASE_URL = 'http://192.168.71.63:5000';
+
+const startOfMonth = moment()
+  .clone()
+  .startOf('month')
+  .format('YYYY-MM-DDTHH:mm:ssZ');
+
+const endOfMonth = moment()
+  .clone()
+  .endOf('month')
+  .format('YYYY-MM-DDTHH:mm:ssZ');
 
 const generateInvoiceId = (worker: any) => {
   const _date = moment().format('YYYY-MM-DD');
@@ -28,6 +39,7 @@ const isButtonDisabled = () => {
     Number(today) == 30 ||
     Number(today) == 1 ||
     Number(today) == 2 ||
+    Number(today) == 27 ||
     Number(today) == 3
   ) {
     return false;
@@ -39,6 +51,7 @@ const isButtonDisabled = () => {
 const Payment = () => {
   const user = useSelector(state => state?.user?.user);
   const dispatch = useDispatch();
+  const [invoice, setInvoice] = useState<any>(null);
 
   const downloadPDF = () => {
     const {dirs} = RNFetchBlob.fs;
@@ -108,6 +121,15 @@ const Payment = () => {
       });
   };
 
+  const uploadPDf = async () => {
+    const response = await DocumentPicker.pick({
+      presentationStyle: 'fullScreen',
+      type: [types.pdf],
+      allowMultiSelection: false,
+    });
+    setInvoice(response);
+  };
+
   const sendInvoices = () => {
     console.log('Call submit invoice API');
   };
@@ -128,26 +150,54 @@ const Payment = () => {
       </View>
 
       <View style={styles.commonContent}>
-        <NHCButton
-          onPress={downloadPDF}
-          label="Generate Invoice (Fortnite)"
-          style={
-            isButtonDisabled()
-              ? styles.disableContainer
-              : styles.commonContainer
-          }
-          disabled={isButtonDisabled()}
-        />
-        <NHCButton
-          style={
-            isButtonDisabled()
-              ? styles.disableContainer
-              : styles.commonContainer
-          }
-          label="Send Invoice (Fortnite)"
-          onPress={sendInvoices}
-          disabled={isButtonDisabled()}
-        />
+        <>
+          {invoice ? (
+            <NHCText
+              label={`📄 ${invoice[0]?.name}`}
+              type={NHCTextTypes.H4}
+              bold
+            />
+          ) : (
+            <NHCButton
+              onPress={downloadPDF}
+              label="Generate Invoice (Fortnite)"
+              style={
+                isButtonDisabled()
+                  ? styles.disableContainer
+                  : styles.commonContainer
+              }
+              disabled={isButtonDisabled()}
+            />
+          )}
+        </>
+
+        <>
+          {invoice ? (
+            <View style={{display: 'flex', flexDirection: 'row'}}>
+              <NHCButton
+                style={styles.iconButton}
+                label="Re-upload"
+                onPress={uploadPDf}
+              />
+              <NHCButton
+                style={styles.iconButton}
+                label="Send Invoice"
+                onPress={sendInvoices}
+              />
+            </View>
+          ) : (
+            <NHCButton
+              style={
+                isButtonDisabled()
+                  ? styles.disableContainer
+                  : styles.commonContainer
+              }
+              label="Upload Invoice (Fortnite)"
+              onPress={uploadPDf}
+              disabled={isButtonDisabled()}
+            />
+          )}
+        </>
       </View>
     </NHCPrimaryHeader>
   );
@@ -184,6 +234,19 @@ const styles = StyleSheet.create({
     elevation: 6,
     marginTop: getScaledNumber(20),
     borderRadius: getScaledNumber(25),
+  },
+  iconButton: {
+    width: '28%',
+    paddingVertical: getScaledNumber(13),
+    backgroundColor: colors.primary,
+    shadowColor: colors.shadowBlack,
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 6,
+    marginTop: getScaledNumber(20),
+    borderRadius: getScaledNumber(25),
+    marginHorizontal: 4,
   },
   disableContainer: {
     paddingVertical: getScaledNumber(13),
