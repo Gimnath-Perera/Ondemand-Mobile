@@ -10,9 +10,10 @@ import moment from 'moment';
 import RNFetchBlob from 'rn-fetch-blob';
 import {showMessage} from 'react-native-flash-message';
 import {endLoading, startLoading} from '../actions/common.action';
+import {uploadInvoice} from '../actions/user.actions';
 
 // const BASE_URL = 'https://ondemand-dev.herokuapp.com';
-const BASE_URL = 'http://192.168.71.63:5000';
+const BASE_URL = 'http://192.168.1.102:5000';
 
 const startOfMonth = moment()
   .clone()
@@ -49,7 +50,8 @@ const isButtonDisabled = () => {
 };
 
 const Payment = () => {
-  const user = useSelector(state => state?.user?.user);
+  const user = useSelector((state: any) => state?.user?.user);
+
   const dispatch = useDispatch();
   const [invoice, setInvoice] = useState<any>(null);
 
@@ -127,11 +129,42 @@ const Payment = () => {
       type: [types.pdf],
       allowMultiSelection: false,
     });
-    setInvoice(response);
+
+    const fileData = {
+      uri: response[0]?.uri,
+      name: response[0]?.name,
+      type: response[0]?.type,
+    };
+
+    setInvoice(fileData);
   };
 
   const sendInvoices = () => {
-    console.log('Call submit invoice API');
+    const data = new FormData();
+    data.append('files', invoice);
+    data.append('worker', user?._id);
+    data.append('totalPayment', 3200);
+    dispatch(
+      uploadInvoice(
+        data,
+        () => {
+          showMessage({
+            message: 'Success',
+            description: 'Invoice uploaded succesfully',
+            type: 'success',
+          });
+          setInvoice(null);
+        },
+        (data: any) => {
+          showMessage({
+            message: 'Error',
+            description: 'Duplicate invoice found',
+            type: 'danger',
+          });
+          setInvoice(null);
+        },
+      ),
+    );
   };
 
   return (
@@ -153,7 +186,7 @@ const Payment = () => {
         <>
           {invoice ? (
             <NHCText
-              label={`📄 ${invoice[0]?.name}`}
+              label={`📄 ${invoice?.name}`}
               type={NHCTextTypes.H4}
               bold
             />

@@ -26,6 +26,7 @@ import {
   UPDATE_PROFILE_PIC,
   GET_CHAT_BY_USER,
   GET_COMPLETED_RECORDS,
+  UPLOAD_INVOICE,
 } from '../common/constants';
 
 import UserAPi from '../apis/user.api';
@@ -209,6 +210,15 @@ export function* uploadProfilePic({payload, success, failed}) {
   }
 }
 
+export function* uploadInvoice({payload, success, failed}) {
+  try {
+    yield call(UserAPi.uploadInvoiceAPI, payload);
+    success();
+  } catch (error) {
+    failed(error);
+  }
+}
+
 function* userSaga() {
   yield takeEvery(USER_REGISTER, userRegister);
   yield takeEvery(USER_LOGIN, userLogin);
@@ -226,6 +236,7 @@ function* userSaga() {
   yield takeEvery(GET_COMPLETED_RECORDS, getCompletedRecordsByUser);
   yield takeEvery(UPLOAD_PROFILE_PIC, uploadProfilePic);
   yield takeEvery(SET_REFRESH_AND_AUTH_TOKEN, setRefreshAndAuthToken);
+  yield takeEvery(UPLOAD_INVOICE, uploadInvoice);
 }
 
 export default userSaga;

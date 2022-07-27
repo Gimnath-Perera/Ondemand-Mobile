@@ -5,7 +5,7 @@ import {startLoading, endLoading} from '../actions/common.action';
 import {setRefreshAndAuthToken} from '../actions/user.actions';
 
 // const BASE_URL = 'https://ondemand-dev.herokuapp.com';
-const BASE_URL = 'http://192.168.71.63:5000';
+const BASE_URL = 'http://192.168.1.102:5000';
 interface IRequest {
   url?: string;
   data?: object;

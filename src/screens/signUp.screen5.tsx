@@ -29,7 +29,7 @@ const SignUpScreen2 = () => {
 
       const data = {
         uri: assets[0].uri,
-        name: `proof_of_id.${assets[0].fileName?.split('.')[1]}`,
+        name: `proofOfId.${assets[0].fileName?.split('.')[1]}`,
         type: assets[0].type,
       };
       setFile(data);

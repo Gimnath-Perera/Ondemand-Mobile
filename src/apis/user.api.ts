@@ -117,4 +117,12 @@ export default class UserAPI {
       method: 'get',
       action: `/v1/report?limit=${limit}&sortBy=${sortBy}&page=${page}&status=${status}&worker=${worker}&startDate=${startDate}&endDate=${endDate}`,
     });
+
+  static uploadInvoiceAPI = (data: any) =>
+    Api.request({
+      method: 'post',
+      action: '/v1/payments',
+      data,
+      isFormData: true,
+    });
 }

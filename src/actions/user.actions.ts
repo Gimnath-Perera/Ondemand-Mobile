@@ -18,6 +18,7 @@ import {
   UPLOAD_PROFILE_PIC,
   GET_CHAT_BY_USER,
   GET_COMPLETED_RECORDS,
+  UPLOAD_INVOICE,
 } from '../common/constants';
 
 export const userLogin = (
@@ -37,6 +38,17 @@ export const uploadDocuments = (
   failed: Function,
 ) => ({
   type: UPLOAD_DOCUMENTS,
+  payload,
+  success,
+  failed,
+});
+
+export const uploadInvoice = (
+  payload: Object,
+  success: Function,
+  failed: Function,
+) => ({
+  type: UPLOAD_INVOICE,
   payload,
   success,
   failed,
