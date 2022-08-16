@@ -40,7 +40,6 @@ const isButtonDisabled = () => {
     Number(today) == 30 ||
     Number(today) == 1 ||
     Number(today) == 2 ||
-    Number(today) == 27 ||
     Number(today) == 3
   ) {
     return false;
@@ -143,7 +142,8 @@ const Payment = () => {
     const data = new FormData();
     data.append('files', invoice);
     data.append('worker', user?._id);
-    data.append('totalPayment', 3200);
+    data.append('startDate', startOfMonth);
+    data.append('endDate', endOfMonth);
     dispatch(
       uploadInvoice(
         data,
