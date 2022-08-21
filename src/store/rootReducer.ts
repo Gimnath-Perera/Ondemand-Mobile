@@ -21,7 +21,7 @@ const authConfig = {
 const userConfig = {
   key: 'user',
   storage: AsyncStorage,
-  whitelist: ['userId'], // only userId will be persisted
+  //whitelist: ['userId'], // only userId will be persisted
 };
 
 const messageConfig = {
